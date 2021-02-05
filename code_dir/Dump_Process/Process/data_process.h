@@ -97,6 +97,12 @@ typedef struct __RESPONSE__
 extern queue<RESPONSE*>  g_TaskQueue;
 
 extern pthread_mutex_t g_mutex;
+//*brif 互斥量的使用方法
+// pthread_mutex_t g_mutex; 
+// pthread_mutex_init(&g_mutex, NULL);
+// pthread_mutex_lock(&g_mutex);		
+// pthread_mutex_unlock(&g_mutex);	
+// pthread_mutex_destroy(&g_mutex); 
 
 class DataProcess
 {

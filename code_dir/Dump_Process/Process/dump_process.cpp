@@ -190,6 +190,23 @@ RESPONSE* DumpProcess::process(string& filename)
             }
             iter++;
         }
+        // map<DUMP_TYPE,VALUE*>::iterator ite;     //map迭代器
+        // list<float>::iterator ite_list;		//list迭代器
+        // ite=(*(m_response->list)).begin();
+        // 		int mark =0;
+        // 		while(ite != (*(m_response->list)).end())
+        // 		{
+        // 			//输出first，代表map的key值，对应的是csv文件的列属性，属性的意义在DUMP_TYPE枚举中列出
+        // 			cout<< ite->first <<endl;
+        // 			ite_list = (*(m_response->list))[mark]->list.begin();
+        // 			while(ite_list!=(*(m_response->list))[mark]->list.end())
+        // 			{
+        // 					cout << *ite_list<<"	"; //输出每个列中对应的值，渲染的小伙伴要读取这部分数据
+        // 					ite_list++;
+        // 			}
+        // 			mark++;
+        // 			ite++;
+        // 		}
         fclose(fp);
         fp = NULL;
         m_response->result = RESULT::SUCCESS;
@@ -203,9 +220,13 @@ RESPONSE* DumpProcess::process(string& filename)
             float maxValueIFE =0;
             float maxValueIPE =0;
             //计算eis_pre_crop_vOUT_windowWidth中的最大值
+            //(((*(m_response->pDumpMap))[eis_pre_crop_vOUT_windowWidth])->col_list.begin())
+            //(((*(m_response->pDumpMap))[eis_pre_crop_vOUT_windowWidth])->col_list.end())
             auto max = max_element((((*(m_response->pDumpMap))[eis_pre_crop_vOUT_windowWidth])->col_list.begin()),(((*(m_response->pDumpMap))[eis_pre_crop_vOUT_windowWidth])->col_list.end()));
             maxValueIFE = *max;
             //计算output_crop_fov_windowWidth中的最大值
+           //(((*(m_response->pDumpMap))[output_crop_fov_windowWidth])->col_list.begin())
+           //(((*(m_response->pDumpMap))[output_crop_fov_windowWidth])->col_list.end())
             max = max_element((((*(m_response->pDumpMap))[output_crop_fov_windowWidth])->col_list.begin()),(((*(m_response->pDumpMap))[output_crop_fov_windowWidth])->col_list.end()));
             maxValueIPE = *max;
             //计算ifezoom
@@ -254,7 +275,7 @@ while(ite !=  (*(m_response->pDumpMap)).end())
 	ite_list =  ((*(m_response->pDumpMap))[(DUMP_TYPE)mark])->col_list.begin();      
 	while(ite_list!=((*(m_response->pDumpMap))[(DUMP_TYPE)mark])->col_list.end())
 	{
-		cout << *ite_list<<"	"; 
+		cout << *ite_list<<"	"; //输出每个列中对应的值，通信的小伙伴要读取这部分数据给渲染的小伙伴
 		ite_list++;
 	}
 		mark++;
