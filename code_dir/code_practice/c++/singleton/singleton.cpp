@@ -2,9 +2,8 @@
 using namespace std;
 #include <mutex>
 #include <thread>
-std::mutex g_mutex;
+static std::mutex g_mutex;
 
-class Singleton;
 
 class Singleton
 {
@@ -26,7 +25,6 @@ private:
     Singleton() { }
  
     static Singleton *pInstance;
-    static pthread_mutex_t mutex_t;
 };
 
 Singleton *Singleton::pInstance = NULL;
@@ -38,6 +36,7 @@ int main()
     {
         cout << "getinstance success" << endl;
     }
+
 
 
     return 0; 
